@@ -5,7 +5,7 @@ import './MainNavigation.css'
 
 export default (props: any) => (
     <AuthContext.Consumer>
-        {(context)=>{
+        {(context: any)=>{
             return (
                 <header className="main-nav">
                 <div className="main-nav-logo">
@@ -15,13 +15,16 @@ export default (props: any) => (
                     <ul>
                         {!context.token && <li><NavLink to="/auth">Authentication</NavLink></li>}
                         <li><NavLink to="/events">Events</NavLink></li>
-                        {context.token && <li><NavLink to="/bookings">Bookings</NavLink></li>}
+                        {context.token && (
+                        <React.Fragment>
+                            <li><NavLink to="/bookings">Bookings</NavLink></li>
+                            <li><NavLink to="/logout" onClick={context.logout}>Logout</NavLink></li>
+                        </React.Fragment>
+                        )}
                     </ul>
                 </nav>
                 </header>
             )
         }}
-
     </AuthContext.Consumer>
-
 )
